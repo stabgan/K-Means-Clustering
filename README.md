@@ -1,83 +1,20 @@
-# K-Means Clustering — Customer Segmentation
+# K-Means-Clustering
+I implemented the K-Means Clustering Model to Analyse the Data in Python and R
 
-A machine-learning project that segments mall customers into distinct groups based on their **Annual Income** and **Spending Score** using the K-Means clustering algorithm. Implementations are provided in both Python and R.
+## The steps I followed are :
+- Choose the number K of the clusters
+- Select at random K points , the centroids ( not necessarily from your dataset )
+- Assign each data point to the closest centroid - That forms K cluster [ We basically take Eucleidan distance ]
+- Compute and place the new centroid of each Cluster
+- Reassign each data point to the new closest centroid 
+-If any reassignment takes place go , to 4th step else END
 
-## Methodology
+# Due to the K-Means initialization trap we have to use 'the' <i> K-Means++ </i>
 
-### 1. Elbow Method
+## So we use the <i> Within cluster Sum of Squares </i>  and use the Elbow method to select optimal number of cluster
 
-The optimal number of clusters is determined using the **Elbow Method**. We compute the Within-Cluster Sum of Squares (WCSS) for cluster counts 1 through 10 and plot the results. The "elbow" in the curve indicates the point of diminishing returns — in this dataset, **K = 5** is the sweet spot.
+[ to know abut the <- operator I used in R ](https://www.statmethods.net/management/operators.html)
 
-### 2. K-Means++ Clustering
+![down](https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif)
 
-Once the optimal K is identified, the K-Means++ algorithm is applied to avoid the random initialization trap. The algorithm:
-
-1. Selects K initial centroids using a smart seeding strategy.
-2. Assigns each data point to the nearest centroid (Euclidean distance).
-3. Recomputes centroids as the mean of each cluster.
-4. Repeats steps 2–3 until convergence.
-
-The result is five well-separated customer segments visualized in a scatter plot.
-
-![K-Means convergence](https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif)
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| 🐍 Language | Python 3, R |
-| 📊 Data | pandas, NumPy |
-| 🤖 ML | scikit-learn (`KMeans`) |
-| 📈 Visualization | matplotlib (Python), `cluster` package (R) |
-
-## Dependencies
-
-### Python
-
-```
-numpy
-matplotlib
-pandas
-scikit-learn
-```
-
-### R
-
-```
-cluster
-caTools
-```
-
-## How to Run
-
-### Python
-
-```bash
-# Install dependencies
-pip install numpy matplotlib pandas scikit-learn
-
-# Run the clustering script
-python kmeans.py
-```
-
-### R
-
-```r
-# Open kmeans.R in RStudio or run from the terminal
-Rscript kmeans.R
-```
-
-> The dataset `Mall_Customers.csv` must be in the same directory as the scripts.
-
-## Dataset
-
-`Mall_Customers.csv` contains 200 records with features including Customer ID, Gender, Age, Annual Income (k$), and Spending Score (1–100). The clustering uses only Annual Income and Spending Score.
-
-## Known Issues
-
-- `data_preprocessing_template.py` references a generic `Data.csv` that is not included in this repository — it is a standalone preprocessing template, not part of the clustering pipeline.
-- The R scripts use base `kmeans()` without K-Means++ initialization (R's default is Hartigan-Wong).
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+# It is a Interative process
